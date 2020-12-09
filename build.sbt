@@ -10,8 +10,8 @@ lazy val sample = (project in file("."))
     libraryDependencies ++= Seq(
       "org.apache.spark" %% "spark-core" % "2.4.4" % "provided",
       "org.apache.spark" %% "spark-sql" % "2.4.4" % "provided",
-      "com.github.scopt" %% "scopt" % "3.7.1",
-      "com.gigahex" %% "spark-metrics-sdk" % "0.1.0-SNAPSHOT"
+      "com.github.scopt" %% "scopt" % "3.7.1"
+//      "com.gigahex" %% "spark-error" % "0.0.3-SNAPSHOT"
     )
   )
 
@@ -21,8 +21,8 @@ lazy val projectSettings = baseSettings ++ buildSettings ++  Seq(
 
 lazy val buildSettings = Seq(
   version := releaseVersion,
-  scalaVersion := "2.11.12",
-  assemblyOutputPath in assembly := file(s"${baseDirectory.value.getAbsolutePath}/target/${moduleName.value}.jar"),
+  crossScalaVersions := Seq("2.11.12", "2.12.6"),
+  //assemblyOutputPath in assembly := file(s"${baseDirectory.value.getAbsolutePath}/target/${moduleName.value}.jar"),
   assemblyJarName in assembly := s"${moduleName.value}.jar",
   assemblyMergeStrategy in assembly := {
     case PathList(ps @ _*) if ps.last endsWith ".html" => MergeStrategy.first
